@@ -18,29 +18,33 @@
         <button type="button" class="show-story"><b>Show Story</b></button>
         <div class="story">
             <br>
-            <p>Awalnya, gua liat jeje ama haura pas mau buat kelompok kok kaya lama banget padahal cuma
-                nentuin kelompok doang. Jadinya gua bikin aja deh website ini buat ngecepetin proses pembuatan
-                kelompoknya.
-                Gua buat ini juga fair kok, tiap generation uda pasti unique.</p>
-            <p><i>*kecuali buat kelompok terakhir karena bakal ada 4 cewe & 2 cowo.</i></p>
+            <p>At first, I saw Jeje and Haura taking a really long time when trying to create groups even though they
+                were
+                just deciding the groups. So, I decided to create this website to speed up the process of group
+                formation. I
+                made sure this is fair as well, with each generation being guaranteed to be unique.</p>
+
+            <p><i>*Except for the last group because there will be 4 girls & 2 boys.</i></p>
             <br>
         </div>
         <br>
         <br>
         <button type="button" class="generate" onclick="show()">Generate</button>
         <br>
-        <p id="result"></p>
+        <div id="groups"></div>
+        <br>
+        <div id="groups-2"></div>
     </div>
 </body>
 
 <script>
-    var coll = document.getElementsByClassName("show-story");
-    var i;
+    let coll = document.getElementsByClassName("show-story");
+    let i;
 
     for (i = 0; i < coll.length; i++) {
         coll[i].addEventListener("click", function () {
             this.classList.toggle("active");
-            var content = this.nextElementSibling;
+            let content = this.nextElementSibling;
             if (content.style.display === "block") {
                 content.style.display = "none";
                 this.innerHTML = "Show Story";
@@ -52,6 +56,13 @@
     }
 </script>
 <script>
+    Object.defineProperty(String.prototype, 'capitalize', {
+        value: function () {
+            return this.charAt(0).toUpperCase() + this.slice(1);
+        },
+        enumerable: false
+    });
+
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -70,15 +81,13 @@
 
             for (let i = 0; i < 6; i++) {
                 const result = [];
-
                 for (let j = 0; j < 3 && males.length > 0; j++) {
-                    result.push(males.shift());
+                    result.push(males.shift().capitalize());
                 }
 
                 const femalesTake = groups.length < 5 ? 3 : 4;
-
                 for (let j = 0; j < femalesTake && females.length > 0; j++) {
-                    result.push(females.shift());
+                    result.push(females.shift().capitalize());
                 }
 
                 groups.push(result);
@@ -90,12 +99,48 @@
         }
     }
 
+    // Assuming you have a global variable to keep track of the current groups
+    let currentGroups = [];
+
     function show() {
-        let doc = document.getElementById("result");
-        doc.innerHTML = "Hello!";
-        doc.style = "font-size: large;";
-        generate();
+        // Clear existing groups
+        currentGroups = [];
+        let groupsElement = document.getElementById("groups");
+        groupsElement.innerHTML = ''; // Clear the content of the groups element
+
+        // Generate and display new groups
+        let groups = generate();
+
+        for (let i = 0; i < 6; i += 3) {
+            let rowContainer = document.createElement("div");
+            rowContainer.className = "row-container";
+
+            for (let j = i; j < i + 3; j++) {
+                let groupContainer = document.createElement("div");
+                groupContainer.className = "group-container";
+
+                let groupTitle = document.createElement("p");
+                groupTitle.innerHTML = `Group ${j + 1}`;
+
+                let groupElement = document.createElement("p");
+                groupElement.innerHTML = groups[j].join("<br>");
+
+                groupContainer.appendChild(groupTitle);
+                groupContainer.appendChild(groupElement);
+                rowContainer.appendChild(groupContainer);
+
+                currentGroups.push(groups[j]);
+            }
+
+            groupsElement.appendChild(rowContainer);
+        }
+
+        console.log(currentGroups, groupsElement);
     }
+
+
+
+
 
 </script>
 
