@@ -11,8 +11,9 @@
 
 <body>
     <div>
+        <h3 id="datetime"></h3>
         <h1>FANOF Group Generator</h1>
-        <h2><i>made with <3 by <a href="https://instagr.am/wildanrfq">jer</a></i></h2>
+        <h3><i>made with </i>❤️<i> by <a href="https://instagr.am/wildanrfq">jer</a></i></h3>
     </div>
     <div style="text-align: center;">
         <button type="button" class="show-story"><b>Show Story</b></button>
@@ -30,6 +31,8 @@
         <br>
         <br>
         <button type="button" class="generate" onclick="show()">Generate</button>
+        <button type="button" class="show-sleepy"><b>😴</b></button>
+        <div class="sleepy"></div>
         <br>
         <div id="groups"></div>
         <br>
@@ -37,6 +40,21 @@
     </div>
 </body>
 
+<script>
+    function updateDateTime() {
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleString();
+        const userTimezoneOffset = currentDate.getTimezoneOffset();
+        const userTimezoneOffsetHours = Math.floor(Math.abs(userTimezoneOffset) / 60);
+        const userTimezoneOffsetMinutes = Math.abs(userTimezoneOffset) % 60;
+        const userTimezoneOffsetFormatted = `${userTimezoneOffset < 0 ? '-' : '+'}${userTimezoneOffsetHours}:${userTimezoneOffsetMinutes}`;
+        document.getElementById("datetime").textContent = formattedDate;
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+</script>
+
+</script>
 <script>
     let coll = document.getElementsByClassName("show-story");
     let i;
@@ -54,6 +72,32 @@
             }
         });
     }
+
+    let col = document.getElementsByClassName("show-sleepy");
+    let ii;
+
+    for (ii = 0; ii < col.length; ii++) {
+        col[ii].addEventListener("click", function () {
+            let content = this.nextElementSibling;
+            let existingBr = content.querySelector("br");
+            let existingImg = content.querySelector("img");
+            if (existingImg) {
+                content.removeChild(existingImg);
+                content.removeChild(existingBr);
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+                let br = document.createElement("br");
+                content.appendChild(br);
+                let img = document.createElement("img");
+                img.src = sleepy[(Math.floor(Math.random() * 6))];
+                img.border = "5px solid";
+                img.width = 150;
+                content.appendChild(img);
+            }
+        });
+    }
+
 </script>
 <script>
     Object.defineProperty(String.prototype, 'capitalize', {
@@ -99,16 +143,13 @@
         }
     }
 
-    // Assuming you have a global variable to keep track of the current groups
     let currentGroups = [];
 
     function show() {
-        // Clear existing groups
         currentGroups = [];
         let groupsElement = document.getElementById("groups");
-        groupsElement.innerHTML = ''; // Clear the content of the groups element
+        groupsElement.innerHTML = '';
 
-        // Generate and display new groups
         let groups = generate();
 
         for (let i = 0; i < 6; i += 3) {
@@ -137,11 +178,6 @@
 
         console.log(currentGroups, groupsElement);
     }
-
-
-
-
-
 </script>
 
 </html>

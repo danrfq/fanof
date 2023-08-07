@@ -20,7 +20,8 @@ body {
 
 p,
 h1,
-h2 {
+h2,
+h3 {
     text-align: center;
 }
 
@@ -49,6 +50,13 @@ h2 {
 
 }
 
+.show-sleepy {
+    position: absolute;
+    width: 40px;
+    height: 46px;
+    border-style: solid;
+}
+
 .show-story {
     background-color: red;
     border-style: solid;
@@ -63,6 +71,12 @@ h2 {
 .active,
 .show-story:hover {
     background-color: red;
+}
+
+.sleepy {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
 }
 
 .story {
