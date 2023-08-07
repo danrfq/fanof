@@ -35,7 +35,7 @@ h3 {
     flex: 1;
     margin: 5px;
     padding: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #000;
     text-align: center;
 }
 
@@ -44,7 +44,7 @@ h3 {
     background-color: green;
     color: white;
     font-size: xx-large;
-    width: 300px;
+    width: 260px;
     font-family: 'Gotham';
     border-style: solid;
 
