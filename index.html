@@ -10,26 +10,46 @@
 
 <body>
     <div>
-        <h1 align="center">FANOF Group Generator</h1>
-        <h2 align="center"><i>made with <3 by <a href="https://instagr.am/wildanrfq">jer</a></i></h2>
-    </div>
-    <div>
-        <br>
-        <p align="center">Awalnya, gua liat jeje ama haura pas mau buat kelompok kok</p>
-        <p align="center">kaya lama banget padahal cuma nentuin kelompok doang.</p>
-        <p align="center">Jadinya gua bikin aja deh website ini buat ngecepetin proses</p>
-        <p align="center">pembuatan kelompoknya.</p>
-        <p align="center">Gua buat ini juga fair kok, tiap generation uda pasti unique.</p>
-        <p align="center"><i>*kecuali buat kelompok terakhir karena bakal ada 4 cewe & 2 cowo.</i></p>
-        <br>
+        <h1>FANOF Group Generator</h1>
+        <h2><i>made with <3 by <a href="https://instagr.am/wildanrfq">jer</a></i></h2>
     </div>
     <div style="text-align: center;">
-        <button type="button" class="gen" onclick="show()"><b>Generate!</b></button>
+        <button type="button" class="show-story"><b>Show Story</b></button>
+        <div class="story">
+            <br>
+            <p>Awalnya, gua liat jeje ama haura pas mau buat kelompok kok kaya lama banget padahal cuma
+                nentuin kelompok doang. Jadinya gua bikin aja deh website ini buat ngecepetin proses pembuatan
+                kelompoknya.
+                Gua buat ini juga fair kok, tiap generation uda pasti unique.</p>
+            <p><i>*kecuali buat kelompok terakhir karena bakal ada 4 cewe & 2 cowo.</i></p>
+            <br>
+        </div>
+        <br>
+        <br>
+        <button type="button" class="generate" onclick="show()">Generate</button>
         <br>
         <p id="result"></p>
     </div>
 </body>
 
+<script>
+    var coll = document.getElementsByClassName("show-story");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+                this.innerHTML = "Show Story";
+            } else {
+                content.style.display = "block";
+                this.innerHTML = "Hide Story";
+            }
+        });
+    }
+</script>
 <script>
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {

@@ -1,10 +1,3 @@
-
-body {
-    background-color: pink;
-    font-family: 'Gotham';
-    color: black
-}
-
 @font-face {
     font-family: 'Gotham';
     src: url('fonts/gotham-medium.eot');
@@ -19,11 +12,49 @@ body {
     font-style: normal;
 }
 
-.gen {
+body {
+    background-color: pink;
+    font-family: 'Gotham';
+    color: black
+}
+
+p, h1, h2 {
+    text-align: center;
+}
+.generate {
     background-color: green;
     color: white;
+    font-size: xx-large;
+    width: 300px;
+    font-family: 'Gotham';
+    border-style: solid;
+
+}
+
+.show-story {
+    background-color: red;
+    border-style: solid;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    text-align: left;
+    font-family: 'Gotham';
     font-size: large;
-    width: 150px;
+}
+
+.active,
+.show-story:hover {
+    background-color: red;
+}
+
+.story {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    border-style: solid;
+    border-color: black;
+    color: white;
+    background-color: red;
 }
 
 #result {
