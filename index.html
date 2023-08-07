@@ -1,0 +1,81 @@
+<html>
+<link rel="stylesheet" href="main.css">
+<title>FANOF Group Generator</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FANOF Group Generator">
+<meta property="og:title" content="FANOF Group Generator">
+<meta property="og:description" content="A tool to instantly generate group for school assignments.">
+<meta name="theme-color" content="#1f8b4c">
+<script src="students.js"></script>
+
+<body>
+    <div>
+        <h1 align="center">FANOF Group Generator</h1>
+        <h2 align="center"><i>made with <3 by <a href="https://instagr.am/wildanrfq">jer</a></i></h2>
+    </div>
+    <div>
+        <br>
+        <p align="center">Awalnya, gua liat jeje ama haura pas mau buat kelompok kok</p>
+        <p align="center">kaya lama banget padahal cuma nentuin kelompok doang.</p>
+        <p align="center">Jadinya gua bikin aja deh website ini buat ngecepetin proses</p>
+        <p align="center">pembuatan kelompoknya.</p>
+        <p align="center">Gua buat ini juga fair kok, tiap generation uda pasti unique.</p>
+        <p align="center"><i>*kecuali buat kelompok terakhir karena bakal ada 4 cewe & 2 cowo.</i></p>
+        <br>
+    </div>
+    <div style="text-align: center;">
+        <button type="button" class="gen" onclick="show()"><b>Generate!</b></button>
+        <br>
+        <p id="result"></p>
+    </div>
+</body>
+
+<script>
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function generate() {
+        try {
+            shuffle(students);
+
+            const males = students.filter(s => s.includes(" - m")).map(m => m.replace(" - m", ""));
+            const females = students.filter(s => s.includes(" - f")).map(f => f.replace(" - f", ""));
+
+            const groups = [];
+
+            for (let i = 0; i < 6; i++) {
+                const result = [];
+
+                for (let j = 0; j < 3 && males.length > 0; j++) {
+                    result.push(males.shift());
+                }
+
+                const femalesTake = groups.length < 5 ? 3 : 4;
+
+                for (let j = 0; j < femalesTake && females.length > 0; j++) {
+                    result.push(females.shift());
+                }
+
+                groups.push(result);
+            }
+
+            return groups;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    function show() {
+        let doc = document.getElementById("result");
+        doc.innerHTML = "Hello!";
+        doc.style = "font-size: large;";
+        generate();
+    }
+
+</script>
+
+</html>
